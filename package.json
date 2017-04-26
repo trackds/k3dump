@@ -1,0 +1,22 @@
+{
+  "name": "k3dump",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "cheerio": "^0.22.0",
+    "commander": "^2.9.0",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "bin": {
+    "k3dump": "./bin/www"
+  },
+  "author": "zhuxiang",
+  "license": "ISC"
+}
