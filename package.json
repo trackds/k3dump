@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "chalk": "^1.1.3",
     "cheerio": "^0.22.0",
     "commander": "^2.9.0",
@@ -16,6 +17,9 @@
   },
   "bin": {
     "k3dump": "./bin/www"
+  },
+  "engines" : { 
+    "node" : ">= 7.6.0" 
   },
   "author": "zhuxiang",
   "license": "ISC"
