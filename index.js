@@ -100,8 +100,6 @@ async function netmod () {
     hdLoginSystem = hdLoginSystem ? hdLoginSystem : "";
     rbLoginMode = rbLoginMode ? rbLoginMode : "";
     ddlDatabases = ddlDatabases ? ddlDatabases : "";
-    // txtUserName = "12390";
-    // UserPwd = "19900321holo";
     txtBackEmail = txtBackEmail ? txtBackEmail : "";
     txtUniqueNum = txtUniqueNum ? txtUniqueNum : "";
 
@@ -139,7 +137,6 @@ async function netmod () {
     let dgItemList_PageIndex = urlSafeEcode($("#dgItemList_PageIndex").val());;
     let dgItemList_PageSize = SIZE;
     let condition = "";
-    //emp_id = "fa746190-6841-4b03-b4d3-765b6f08e29a";
     let buf = `__EVENTTARGET=${__EVENTTARGET}&__EVENTARGUMENT=${__EVENTARGUMENT}&__VIEWSTATE=${__VIEWSTATE}&dgItemList_PageIndex=${dgItemList_PageIndex}&dgItemList_PageSize=${dgItemList_PageSize}&condition=${condition}&emp_id=${emp_id}`;
     opt.headers.Cookie = getOpt.headers.Cookie;
     opt.body = buf;

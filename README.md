@@ -16,7 +16,7 @@
 ## 选项
     k3dump --help
 
-    Usage: www [options]
+    Usage: k3dump [options]
 
     Options:
 

@@ -16,7 +16,7 @@
     "start": "node index.js"
   },
   "bin": {
-    "k3dump": "./bin/www"
+    "k3dump": "./bin/k3dump"
   },
   "engines" : { 
     "node" : ">= 7.6.0" 
