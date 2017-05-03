@@ -9,7 +9,10 @@
     k3dump -u userId -p passwd
 ###### or
     k3dump -f filename
-    
+### 指定月份
+    k3dump -u userId -p passwd -m month
+###### or
+    k3dump -f filename -m month
 ## 选项
     k3dump --help
 
