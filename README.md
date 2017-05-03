@@ -3,7 +3,7 @@
     该模块为特定环境下内部使用。脱离环境无法使用
 
 ## 安装
-    npm install -g https://github.com/trackds/k3dump.git
+    npm install -g k3dump
 
 ## 使用
     k3dump -u userId -p passwd

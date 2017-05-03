@@ -12,7 +12,7 @@ const afs = bluebird.promisifyAll(fs);
  * 
 */
 
-prom.version("0.0.1")
+prom.version("1.0.1")
     .option("-u, --userId [value]", "user name")
     .option("-p, --passwd [value]", "password")
     .option("-m, --month <1..12>", "month Is an optional parameter. Default is the current month", parseInt)
