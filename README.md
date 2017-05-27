@@ -1,6 +1,5 @@
 # k3dump
     抓取k3数据的命令行脚本。基于nodejs。需要安装nodejs v7.6.0以上版本。
-    该模块为特定环境下内部使用。脱离环境无法使用
 
 ## 安装
     npm install -g k3dump

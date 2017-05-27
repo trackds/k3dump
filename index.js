@@ -6,13 +6,14 @@ const request = bluebird.promisifyAll(require('request'));
 const {urlSafeEcode,urlSafeDecode} = require('./urlSafeEcode.js');
 const prom = require("commander");
 const afs = bluebird.promisifyAll(fs);
+const package = require('./package.json');
 
 /**
  * @typedef  {{start:Date, end:Date, isWeek:Boolean, isOvertime:Boolean, overtimeLen:Number, workTime:Number}} record
  * 
 */
 
-prom.version("1.0.1")
+prom.version(package.version)
     .option("-u, --userId [value]", "user name")
     .option("-p, --passwd [value]", "password")
     .option("-m, --month <1..12>", "month Is an optional parameter. Default is the current month", parseInt)
@@ -190,13 +191,13 @@ function printK3info(data) {
                 if (currDay.getDate() != aday.getDate()) {
                     let tmp = records[records.length - 1];
                     let len = tmp.end.getHours() - currDay.getHours() + ((tmp.end.getMinutes() - currDay.getMinutes()) / 60);
-                    if (!records[records.length - 1].isWeek) {
+                    if (!tmp.isWeek && currDay.getHours() < 13) {
                         len --;//减去午休时间
                     }
-                    records[records.length - 1].start = currDay;
-                    records[records.length - 1].isOvertime = records[records.length - 1].isWeek ? true : (len > (8 + 1));
-                    records[records.length - 1].overtimeLen = records[records.length - 1].isOvertime ? (records[records.length - 1].isWeek ? len : (len - 8)) : 0;
-                    records[records.length - 1].workTime = len;
+                    tmp.start = currDay;
+                    tmp.isOvertime = tmp.isWeek ? true : (len > (8 + 1));
+                    tmp.overtimeLen = tmp.isOvertime ? (tmp.isWeek ? len : (len - 8)) : 0;
+                    tmp.workTime = len < 0 ? 0 : len;
 
                     if (aday.getMonth() + 1 < MONTH) {
                         break;
@@ -204,7 +205,7 @@ function printK3info(data) {
                     currDay = aday;
                     records.push({end:currDay, isWeek:isWeek});
                 } else {
-                currDay =  aday;
+                    currDay =  aday;
                 }
             }
 
@@ -254,6 +255,8 @@ function printK3info(data) {
         let str = `${records[i].start.toLocaleString()}-${records[i].end.toLocaleTimeString()}\t${records[i].workTime.toFixed(2)}\t\t\t\t\t${records[i].overtimeLen.toFixed(2)}\t\t\t\t\t${records[i].isWeek ? `√`:""}`;
         if (records[i].isOvertime) {
             str = chalk.green(str);
+        } else if(records[i].workTime < 8) {
+            str = chalk.yellow(str);
         } else {
             str = chalk.white(str);
         }

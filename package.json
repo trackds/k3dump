@@ -1,6 +1,6 @@
 {
   "name": "k3dump",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "dependencies": {
@@ -22,6 +22,9 @@
   { 
     "type" : "git",
     "url" : "https://github.com/trackds/k3dump.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trackds/k3dump/issues"
   },
   "engines" : { 
     "node" : ">= 7.6.0" 
