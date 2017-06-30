@@ -186,7 +186,7 @@ function printK3info(data) {
 
             if (currDay === null) {
                 currDay = aday;
-                records.push({end:currDay, isWeek:isWeek});
+                records.push({start:currDay,end:currDay, isWeek:isWeek});
             } else {
                 if (currDay.getDate() != aday.getDate()) {
                     let tmp = records[records.length - 1];
