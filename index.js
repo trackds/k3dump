@@ -179,10 +179,6 @@ function printK3info(data) {
                 aday.setMinutes(0);
                 aday.setSeconds(0);
             }
-            if (aday.getMonth() + 1 > MONTH) {
-                next = next.next();
-                continue;
-            }
 
             if (currDay === null) {
                 currDay = aday;
@@ -199,7 +195,7 @@ function printK3info(data) {
                     tmp.overtimeLen = tmp.isOvertime ? (tmp.isWeek ? len : (len - 8)) : 0;
                     tmp.workTime = len < 0 ? 0 : len;
 
-                    if (aday.getMonth() + 1 < MONTH) {
+                    if ((aday.getMonth() + 1 < MONTH) || (currDay.getFullYear() > aday.getFullYear())) {
                         break;
                     }
                     currDay = aday;
