@@ -179,7 +179,10 @@ function printK3info(data) {
                 aday.setMinutes(0);
                 aday.setSeconds(0);
             }
-
+            if ( (aday.getFullYear() == new Date().getFullYear()) &&  (aday.getMonth() + 1 > MONTH)) {
+                next = next.next();
+                continue;
+            }
             if (currDay === null) {
                 currDay = aday;
                 records.push({start:currDay,end:currDay, isWeek:isWeek, isOvertime:false, overtimeLen:0, workTime:0});
@@ -187,12 +190,12 @@ function printK3info(data) {
                 if (currDay.getDate() != aday.getDate()) {
                     let tmp = records[records.length - 1];
                     let len = tmp.end.getHours() - currDay.getHours() + ((tmp.end.getMinutes() - currDay.getMinutes()) / 60);
-                    if (!tmp.isWeek && currDay.getHours() < 13) {
+                    if (/*!tmp.isWeek && */currDay.getHours() < 13) {
                         len --;//减去午休时间
                     }
                     tmp.start = currDay;
                     tmp.isOvertime = tmp.isWeek ? true : (len > (8 + 1));
-                    tmp.overtimeLen = tmp.isOvertime ? (tmp.isWeek ? len : (len - 8)) : 0;
+                    tmp.overtimeLen = tmp.isOvertime ? (tmp.isWeek ? len : (len - 8.5)) : 0;
                     tmp.workTime = len < 0 ? 0 : len;
 
                     if ((aday.getMonth() + 1 < MONTH) || (currDay.getFullYear() > aday.getFullYear())) {
