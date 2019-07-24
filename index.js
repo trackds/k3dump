@@ -155,7 +155,6 @@ async function filemod() {
     } catch (e) {
         console.error("打开文件出错");
     }
-
 }
 
 function printK3info(data) {
@@ -174,10 +173,19 @@ function printK3info(data) {
             let isWeek = (aday.getDay() === 6) || (aday.getDay() === 0);
             let isOvertime = isWeek;
 
-            if (aday.getHours() < 9) {
-                aday.setHours(9);
-                aday.setMinutes(0);
-                aday.setSeconds(0);
+            if (aday.getHours() < 9)  {
+                if (!isWeek){
+                    aday.setHours(9);
+                    aday.setMinutes(0);
+                    aday.setSeconds(0);
+                }
+                else {
+                    if (aday.getHours() < 6){
+                        aday.setHours(6);
+                        aday.setMinutes(0);
+                        aday.setSeconds(0);
+                    }
+                }
             }
             if ( (aday.getFullYear() == new Date().getFullYear()) &&  (aday.getMonth() + 1 > MONTH)) {
                 next = next.next();
@@ -190,8 +198,14 @@ function printK3info(data) {
                 if (currDay.getDate() != aday.getDate()) {
                     let tmp = records[records.length - 1];
                     let len = tmp.end.getHours() - currDay.getHours() + ((tmp.end.getMinutes() - currDay.getMinutes()) / 60);
-                    if (/*!tmp.isWeek && */currDay.getHours() < 13) {
+                    if ((/*!tmp.isWeek && */currDay.getHours() < 12) && (tmp.end.getHours() > 12)) {
                         len --;//减去午休时间
+                    }
+                    else if ((currDay.getHours() === 12) && (tmp.end.getHours() > 12)){
+                        len = len - ((60 - currDay.getMinutes()) / 60);
+                    }
+                    else if ((currDay.getHours() < 12) && (tmp.end.getHours() === 12)){
+                        len = len - ((tmp.end.getMinutes()) / 60);
                     }
                     tmp.start = currDay;
                     tmp.isOvertime = tmp.isWeek ? true : (len > (8 + 1));
