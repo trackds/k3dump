@@ -208,7 +208,7 @@ function printK3info(data) {
                         len = len - ((tmp.end.getMinutes()) / 60);
                     }
                     tmp.start = currDay;
-                    tmp.isOvertime = tmp.isWeek ? true : ((tmp.end.getHours() >= 18) && (tmp.end.getMinutes() >= 30));
+                    tmp.isOvertime = tmp.isWeek ? true : ((tmp.end.getHours() + (tmp.end.getMinutes() / 60.0) >= 18.5));
                     tmp.overtimeLen = tmp.isOvertime ? (tmp.isWeek ? len : ((tmp.end.getHours() - 18) + (tmp.end.getMinutes() - 30) / 60)) : 0;
                     tmp.workTime = len < 0 ? 0 : len;
 
